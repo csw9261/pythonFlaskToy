@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template
+from flask import Flask, Blueprint, app, render_template, request
 
 import logging
 
@@ -9,4 +9,6 @@ class mainControllerClass:
 
     @main_blueprint.route('/main', methods=['GET'])
     def main():
-        return render_template('/main/index.html')
+        raise Exception('Intentional 500 error')
+        username = request.cookies.get('username')
+        return render_template('/main/index.html', username = username)
