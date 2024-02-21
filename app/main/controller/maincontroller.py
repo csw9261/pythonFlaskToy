@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, app, render_template, request
+from flask import Flask, Blueprint, app, render_template, request, redirect, url_for
 
 import logging
 
@@ -9,6 +9,11 @@ class mainControllerClass:
 
     @main_blueprint.route('/main', methods=['GET'])
     def main():
-        raise Exception('Intentional 500 error')
         username = request.cookies.get('username')
         return render_template('/main/index.html', username = username)
+    
+    # 경로가 없는 경우에 main으로 redirect 처리 
+    @main_blueprint.route('/', methods=['GET', 'POST'])
+    def rootRedirection():
+        return redirect(url_for('main_blueprint.main'))
+
