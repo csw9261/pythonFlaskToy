@@ -3,3 +3,5 @@
 - virtualenv
 - python 3.10.9
 - vscode
+- Docker
+- WSGI(gunicorn)
