@@ -1,5 +1,5 @@
 # Python Flask Document를 참고하여 공부하는 Toy Project
-- https://flask-docs-kr.readthedocs.io/ko/latest/index.html
+- https://flask.palletsprojects.com/en/3.0.x/
 - virtualenv
 - python 3.10.9
 - vscode
@@ -8,3 +8,5 @@
 - Migrate
 - SQLAlchemy
 - factory Pattern
+- pytest
+- coverage
