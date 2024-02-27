@@ -10,3 +10,5 @@
 - factory Pattern
 - pytest
 - coverage
+- pytest
+- sqlite(unit test 시 사용)

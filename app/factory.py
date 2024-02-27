@@ -1,6 +1,4 @@
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from config.config import DB_Config
 
 # 각 컨트롤러 모듈 임포트
@@ -8,19 +6,25 @@ from uploadfile.controller import fileuploadcontroller
 from main.controller import maincontroller
 from user.controller import usercontroller
 
+import logging
+
+"""
 # SQLAlchemy 및 Flask-Migrate 인스턴스 생성
 db = SQLAlchemy()
 migrate = Migrate()
-
+"""
 def create_app():
     app = Flask(__name__)
     
+    # SQLAlchemy 실행 Query 출력
+    logging.basicConfig()
+    logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG)
+    
     # DB 설정 적용
     app.config.from_object(DB_Config)
-    
     # SQLAlchemy 및 Flask-Migrate 초기화
-    db.init_app(app)
-    migrate.init_app(app, db)
+    DB_Config.db.init_app(app)
+    DB_Config.migrate.init_app(app, DB_Config.db)
     
     # 에러 핸들러 설정
     addErrorHandler(app)

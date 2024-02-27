@@ -1,6 +1,14 @@
 import os
 
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
 class DB_Config(object):
+    
+    # SQLAlchemy 및 Flask-Migrate 인스턴스 생성
+    db = SQLAlchemy()
+    migrate = Migrate()
+    
     # SECRET_KEY -> Flask 및 여러 확장 기능에서 보안 관련 작업을 수행할 때 사용됩니다. 예를 들어, 세션, 쿠키, CSRF 보호 등에 사용
     # SECRET_KEY 설정 값을 환경 변수에서 불러오거나, 환경 변수가 설정되어 있지 않은 경우 기본값 'you-will-never-guess'를 사용하도록 하는 방식
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'

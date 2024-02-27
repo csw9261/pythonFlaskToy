@@ -1,12 +1,4 @@
-from flask import Flask, render_template
-
-from uploadfile.controller import fileuploadcontroller
-from main.controller import maincontroller
-from user.controller import usercontroller
-
 from factory import create_app
-
-from config.config import DB_Config
 
 app = create_app()
 
