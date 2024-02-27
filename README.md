@@ -5,3 +5,6 @@
 - vscode
 - Docker
 - WSGI(gunicorn)
+- Migrate
+- SQLAlchemy
+- factory Pattern
