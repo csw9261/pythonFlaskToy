@@ -1,0 +1,36 @@
+- migration 명령어 적용 순서 
+
+1. migrations 폴더 생성
+ flask db init 
+
+2. Flask APP 환경 변수 설정
+$env:FLASK_APP = "app.py:app"
+ - 만약에 여러개의 Flask 어플리케이션을 사용하는 경우라면 사용할때 마다 사용하는 app을 환경변수로 설정해줘야 한다.
+    ex) $env:FLASK_APP = "app.py:other_app"
+    
+3. migrate 명령 실행
+flask db migrate
+
+4. 모델에 변경사항이 있을 때마다 flask db migrate와 flask db upgrade 명령을 사용하여 데이터베이스 스키마를 업데이트
+flask db migrate -m "Update user table email columns Data Type 255"
+
+5. 실제 DB에 적용
+flask db upgrade
+
+-------------------------------
+
+- Flask 환경변수 설정 방법 
+1. Flask APP 환경 변수 설정(app.py에 정의되어 있다면)
+$env:FLASK_APP = "app"
+
+2. 환경변수 확인 
+Get-ChildItem Env:FLASK_APP
+
+---------------------------------------
+
+* migrations/versions 디렉토리에 아무것도 생성이 안되는 경우 
+
+1. SELECT * FROM alembic_version; 으로 버전을 조회해 본다. 
+2. DELETE FROM alembic_version; 해당 테이블을 지운다.
+3. 다시 flask db init 명령어를 사용하여 migrations 폴더를 생성한다 
+4. 이 방법은 위험하다 기존 데이터 날라감 

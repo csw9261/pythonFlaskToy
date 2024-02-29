@@ -1,5 +1,5 @@
 from sqlalchemy.exc import SQLAlchemyError
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from db_init import db
 from models import User_Table
 
@@ -30,4 +30,17 @@ class UserService():
             return True, user_info_json
         except SQLAlchemyError as e:
             return False, str(e)
-        
+    
+    def permission_check(email, password):
+        try:
+            select_user = User_Table.query.filter_by(email = email).first()
+            if select_user:
+                if check_password_hash(select_user.password_hash, password):
+                    return True
+                else:
+                    return False
+            else:
+                return False
+            
+        except SQLAlchemyError as error:
+            return False, str(error)
